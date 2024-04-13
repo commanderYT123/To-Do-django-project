@@ -1,1 +1,21 @@
-<h1>hello world</h1>
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}<title>To Do</title>{% endblock title %}
+{% block content %}
+  <h1>To Do List</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" id="id_task" name="task">
+    <button type="submit">save</button>
+  </form>
+  {% for task in tasks %}
+  <p>{{task}}</p> 
+  <form method="post" action="{% url "edit" task.id %}">
+    {% csrf_token %}
+    <button>edit</button> 
+  </form>
+  <form method="post" action="{% url 'deletepage' task.id %}">
+    {% csrf_token %}
+    <button>delete</button>
+    {% endfor %}
+{% endblock content %}
