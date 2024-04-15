@@ -19,14 +19,26 @@
     <div class="card my-3">
       <div class="row justify-content-center align-items-center">
         <div class="col text-center">
-          <p>{{task}}</p>
+          <p>{% if task.done %}<del>{{ task }}</del>{% else %}{{ task }}{% endif %}</p>
         </div>
       </div>
       <div class="row justify-content-center my-3">
         <div class="col-2 mt-3">
-          <form method="post" action="{% url "edit" task.id %}">
+          <form method="post" action="{% url 'edit' task.id %}">
             {% csrf_token %}
             <button class="btn btn-dark w-100">Edit</button>
+          </form>
+        </div>
+        <div class="col-2 mt-3">
+          <form method="post" action="{% url 'toggle_done' task.id %}">
+            {% csrf_token %}
+            <button class="btn btn-dark w-100">
+              {% if task.done %}
+                Undo
+              {% else %}
+                Done
+              {% endif %}
+            </button>
           </form>
         </div>
         <div class="col-2 mt-3">
@@ -37,5 +49,6 @@
         </div>
       </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 {% endblock content %}

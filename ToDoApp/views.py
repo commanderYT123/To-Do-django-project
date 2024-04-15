@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import TaskForm
 from .models import Task
 
@@ -45,3 +45,9 @@ def editPage(request,pk):
         'form':form
     }
     return render(request,"pages/edit.html",context)
+
+def toggle_done(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.done = not task.done
+    task.save()
+    return redirect('index')
