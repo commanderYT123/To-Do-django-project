@@ -1,0 +1,10 @@
+{% block title %}<title>Delete</title>{% endblock title %}
+{% block content %}
+<h1>Are you sure ?</h1>
+<form action="{% url 'index' %}" method="GET">
+    <button type="submit">No</button>
+</form>
+<form method="post" action="{% url 'delete' task.id %}">
+    {% csrf_token %}
+    <button>Yes</button>
+{% endblock content %}
