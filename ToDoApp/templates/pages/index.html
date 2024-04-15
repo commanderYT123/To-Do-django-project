@@ -30,7 +30,7 @@
           </form>
         </div>
         <div class="col-2 mt-3">
-          <form method="post" action="{% url 'toggle_done' task.id %}">
+          <form method="post" action="{% url 'toggleDone' task.id %}">
             {% csrf_token %}
             <button class="btn btn-dark w-100">
               {% if task.done %}
